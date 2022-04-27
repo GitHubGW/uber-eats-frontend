@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { NavigateFunction, useNavigate } from "react-router";
 import Button from "../components/button";
 import ErrorMessage from "../components/errorMessage";
+import MainLayout from "../components/layouts/mainLayout";
 import LightLogo from "../components/lightLogo";
-import PageTitle from "../components/pageTitle";
 import { useEditProfileMutation } from "../generated/graphql";
 import useMe from "../hooks/useMe";
 
@@ -57,8 +57,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="wrapper">
-      <PageTitle title="프로필 수정" />
+    <MainLayout pageTitle="프로필 수정">
       <div className="max-w-2xl w-full py-24 px-16 justify-center border rounded-lg shadow-sm bg-gray-50">
         <LightLogo />
         <form onSubmit={handleSubmit(onValid)} className="flex flex-col w-full gap-1.5">
@@ -98,7 +97,7 @@ const EditProfile = () => {
           {errors.error?.message && <ErrorMessage message={errors.error?.message} />}
         </form>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

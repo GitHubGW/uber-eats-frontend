@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import PageTitle from "../components/pageTitle";
+import MainLayout from "../components/layouts/mainLayout";
 import useMe from "../hooks/useMe";
 
 const Profile = () => {
   const me = useMe();
 
   return (
-    <div className="wrapper">
-      <PageTitle title={`${me?.username} 프로필`} />
+    <MainLayout pageTitle="프로필">
       <div className="max-w-xl w-full py-16 px-16 justify-center border rounded-lg shadow-sm bg-gray-50">
         <div className="flex items-center mb-5">
           <div className="border rounded-full p-10 bg-white">
@@ -36,7 +35,7 @@ const Profile = () => {
           프로필 수정
         </Link>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

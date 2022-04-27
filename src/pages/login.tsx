@@ -3,8 +3,8 @@ import { Link, useNavigate, NavigateFunction, useLocation, Location } from "reac
 import { isLoggedInVar, TOKEN, tokenVar } from "../apollo";
 import Button from "../components/button";
 import ErrorMessage from "../components/errorMessage";
+import MainLayout from "../components/layouts/mainLayout";
 import LightLogo from "../components/lightLogo";
-import PageTitle from "../components/pageTitle";
 import { LoginMutation, useLoginMutation } from "../generated/graphql";
 
 interface LoginFormData {
@@ -52,8 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
-      <PageTitle title="로그인" />
+    <MainLayout pageTitle="로그인">
       <div className="max-w-2xl w-full py-24 px-16 justify-center border rounded-lg shadow-sm bg-gray-50">
         <LightLogo />
         <form onSubmit={handleSubmit(onValid)} className="flex flex-col w-full gap-1.5">
@@ -88,12 +87,12 @@ const Login = () => {
         </form>
         <p className="text-center mt-5 text-base">
           계정이 없으신가요?
-          <Link to="/signup" className="ml-2 text-green-600 hover:underline">
-            계정 생성
+          <Link to="/signup" className="ml-2 font-semibold text-green-600 hover:underline">
+            회원가입
           </Link>
         </p>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate, NavigateFunction } from "react-router-dom";
 import Button from "../components/button";
 import ErrorMessage from "../components/errorMessage";
+import MainLayout from "../components/layouts/mainLayout";
 import LightLogo from "../components/lightLogo";
-import PageTitle from "../components/pageTitle";
 import { CreateAccountMutation, Role, useCreateAccountMutation } from "../generated/graphql";
 
 interface CreateAccountFormData {
@@ -41,8 +41,7 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="wrapper">
-      <PageTitle title="계정 생성" />
+    <MainLayout pageTitle="회원가입">
       <div className="max-w-2xl w-full py-24 px-16 justify-center border rounded-lg shadow-sm bg-gray-50">
         <LightLogo />
         <form onSubmit={handleSubmit(onValid)} className="flex flex-col w-full gap-1.5">
@@ -77,17 +76,17 @@ const CreateAccount = () => {
             <option value={Role.Owner}>음식점 주인</option>
             <option value={Role.Driver}>라이더</option>
           </select>
-          <Button onClick={handleSubmit(onValid)} type={"submit"} loading={loading} isValid={isValid} text="계정 생성" />
+          <Button onClick={handleSubmit(onValid)} type={"submit"} loading={loading} isValid={isValid} text="회원가입" />
           {errors.error?.message && <ErrorMessage message={errors.error?.message} />}
         </form>
         <p className="text-center mt-5 text-base">
           계정이 있으신가요?
-          <Link to="/login" className="ml-2 text-green-600 hover:underline">
+          <Link to="/login" className="ml-2 font-semibold text-green-600 hover:underline">
             로그인
           </Link>
         </p>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

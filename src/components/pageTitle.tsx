@@ -7,7 +7,7 @@ interface PageTitleProps {
 const PageTitle = ({ title }: PageTitleProps) => {
   return (
     <Helmet>
-      <title>{title} | Uber Eats</title>
+      <title>{`${title} | Uber Eats`}</title>
     </Helmet>
   );
 };

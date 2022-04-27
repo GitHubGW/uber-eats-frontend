@@ -8,9 +8,9 @@ const Header = () => {
   const me = useMe();
 
   return (
-    <div className="border-red fixed top-0 left-0 w-full bg-black">
+    <div className="border-red fixed top-0 left-0 w-full bg-black h-28">
       {me?.emailVerified === false && <h1 className="text-white">이메일을 인증해주세요.</h1>}
-      <div className="border-green max-w-7xl m-auto text-white flex justify-between items-center">
+      <div className="content m-auto text-white flex justify-between items-center">
         <Link to="/">
           <DarkLogo />
         </Link>

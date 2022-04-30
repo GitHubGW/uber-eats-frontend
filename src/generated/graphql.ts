@@ -596,6 +596,10 @@ export type VerifyEmailOutput = {
   ok: Scalars['Boolean'];
 };
 
+export type RestaurantFragmentFragment = { __typename?: 'Restaurant', id: number, name: string, address: string, imageUrl: string, isPromoted: boolean, promotedUntilDate?: any | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number } | null };
+
+export type CategoryFragmentFragment = { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number };
+
 export type CreateAccountMutationVariables = Exact<{
   input: CreateAccountInput;
 }>;
@@ -624,12 +628,68 @@ export type VerifyEmailMutationVariables = Exact<{
 
 export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'VerifyEmailOutput', ok: boolean, message: string } };
 
+export type SearchRestaurantsQueryVariables = Exact<{
+  input: SearchRestaurantsInput;
+}>;
+
+
+export type SearchRestaurantsQuery = { __typename?: 'Query', searchRestaurants: { __typename?: 'SearchRestaurantsOutput', ok: boolean, message: string, totalPages?: number | null, totalRestaurants?: number | null, restaurants?: Array<{ __typename?: 'Restaurant', id: number, name: string, address: string, imageUrl: string, isPromoted: boolean, promotedUntilDate?: any | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number } | null }> | null } };
+
+export type SeeAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SeeAllCategoriesQuery = { __typename?: 'Query', seeAllCategories: { __typename?: 'SeeAllCategoriesOutput', ok: boolean, message: string, category?: Array<{ __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number }> | null } };
+
+export type SeeAllRestaurantsQueryVariables = Exact<{
+  input: SeeAllRestaurantsInput;
+}>;
+
+
+export type SeeAllRestaurantsQuery = { __typename?: 'Query', seeAllRestaurants: { __typename?: 'SeeAllRestaurantsOutput', ok: boolean, message: string, totalPages?: number | null, totalRestaurants?: number | null, restaurants?: Array<{ __typename?: 'Restaurant', id: number, name: string, address: string, imageUrl: string, isPromoted: boolean, promotedUntilDate?: any | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number } | null }> | null } };
+
+export type SeeCategoryQueryVariables = Exact<{
+  input: SeeCategoryInput;
+}>;
+
+
+export type SeeCategoryQuery = { __typename?: 'Query', seeCategory: { __typename?: 'SeeCategoryOutput', ok: boolean, message: string, totalPages?: number | null, totalRestaurants?: number | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number, restaurants: Array<{ __typename?: 'Restaurant', id: number, name: string, address: string, imageUrl: string, isPromoted: boolean, promotedUntilDate?: any | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number } | null }> } | null } };
+
 export type SeeMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SeeMeQuery = { __typename?: 'Query', seeMe: { __typename?: 'User', id: number, email: string, username: string, emailVerified: boolean, role: Role, createdAt: any, updatedAt: any } };
 
+export type SeeRestaurantQueryVariables = Exact<{
+  input: SeeRestaurantInput;
+}>;
 
+
+export type SeeRestaurantQuery = { __typename?: 'Query', seeRestaurant: { __typename?: 'SeeRestaurantOutput', ok: boolean, message: string, restaurant?: { __typename?: 'Restaurant', id: number, name: string, address: string, imageUrl: string, isPromoted: boolean, promotedUntilDate?: any | null, category?: { __typename?: 'Category', id: number, name: string, imageUrl: string, totalRestaurants: number } | null } | null } };
+
+export const RestaurantFragmentFragmentDoc = gql`
+    fragment RestaurantFragment on Restaurant {
+  id
+  name
+  address
+  imageUrl
+  category {
+    id
+    name
+    imageUrl
+    totalRestaurants
+  }
+  isPromoted
+  promotedUntilDate
+}
+    `;
+export const CategoryFragmentFragmentDoc = gql`
+    fragment CategoryFragment on Category {
+  id
+  name
+  imageUrl
+  totalRestaurants
+}
+    `;
 export const CreateAccountDocument = gql`
     mutation CreateAccount($input: CreateAccountInput!) {
   createAccount(input: $input) {
@@ -767,6 +827,171 @@ export function useVerifyEmailMutation(baseOptions?: Apollo.MutationHookOptions<
 export type VerifyEmailMutationHookResult = ReturnType<typeof useVerifyEmailMutation>;
 export type VerifyEmailMutationResult = Apollo.MutationResult<VerifyEmailMutation>;
 export type VerifyEmailMutationOptions = Apollo.BaseMutationOptions<VerifyEmailMutation, VerifyEmailMutationVariables>;
+export const SearchRestaurantsDocument = gql`
+    query SearchRestaurants($input: SearchRestaurantsInput!) {
+  searchRestaurants(input: $input) {
+    ok
+    message
+    totalPages
+    totalRestaurants
+    restaurants {
+      ...RestaurantFragment
+    }
+  }
+}
+    ${RestaurantFragmentFragmentDoc}`;
+
+/**
+ * __useSearchRestaurantsQuery__
+ *
+ * To run a query within a React component, call `useSearchRestaurantsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchRestaurantsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchRestaurantsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSearchRestaurantsQuery(baseOptions: Apollo.QueryHookOptions<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>(SearchRestaurantsDocument, options);
+      }
+export function useSearchRestaurantsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>(SearchRestaurantsDocument, options);
+        }
+export type SearchRestaurantsQueryHookResult = ReturnType<typeof useSearchRestaurantsQuery>;
+export type SearchRestaurantsLazyQueryHookResult = ReturnType<typeof useSearchRestaurantsLazyQuery>;
+export type SearchRestaurantsQueryResult = Apollo.QueryResult<SearchRestaurantsQuery, SearchRestaurantsQueryVariables>;
+export const SeeAllCategoriesDocument = gql`
+    query SeeAllCategories {
+  seeAllCategories {
+    ok
+    message
+    category {
+      ...CategoryFragment
+    }
+  }
+}
+    ${CategoryFragmentFragmentDoc}`;
+
+/**
+ * __useSeeAllCategoriesQuery__
+ *
+ * To run a query within a React component, call `useSeeAllCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeeAllCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeeAllCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSeeAllCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<SeeAllCategoriesQuery, SeeAllCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeeAllCategoriesQuery, SeeAllCategoriesQueryVariables>(SeeAllCategoriesDocument, options);
+      }
+export function useSeeAllCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeAllCategoriesQuery, SeeAllCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeeAllCategoriesQuery, SeeAllCategoriesQueryVariables>(SeeAllCategoriesDocument, options);
+        }
+export type SeeAllCategoriesQueryHookResult = ReturnType<typeof useSeeAllCategoriesQuery>;
+export type SeeAllCategoriesLazyQueryHookResult = ReturnType<typeof useSeeAllCategoriesLazyQuery>;
+export type SeeAllCategoriesQueryResult = Apollo.QueryResult<SeeAllCategoriesQuery, SeeAllCategoriesQueryVariables>;
+export const SeeAllRestaurantsDocument = gql`
+    query SeeAllRestaurants($input: SeeAllRestaurantsInput!) {
+  seeAllRestaurants(input: $input) {
+    ok
+    message
+    totalPages
+    totalRestaurants
+    restaurants {
+      ...RestaurantFragment
+    }
+  }
+}
+    ${RestaurantFragmentFragmentDoc}`;
+
+/**
+ * __useSeeAllRestaurantsQuery__
+ *
+ * To run a query within a React component, call `useSeeAllRestaurantsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeeAllRestaurantsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeeAllRestaurantsQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSeeAllRestaurantsQuery(baseOptions: Apollo.QueryHookOptions<SeeAllRestaurantsQuery, SeeAllRestaurantsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeeAllRestaurantsQuery, SeeAllRestaurantsQueryVariables>(SeeAllRestaurantsDocument, options);
+      }
+export function useSeeAllRestaurantsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeAllRestaurantsQuery, SeeAllRestaurantsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeeAllRestaurantsQuery, SeeAllRestaurantsQueryVariables>(SeeAllRestaurantsDocument, options);
+        }
+export type SeeAllRestaurantsQueryHookResult = ReturnType<typeof useSeeAllRestaurantsQuery>;
+export type SeeAllRestaurantsLazyQueryHookResult = ReturnType<typeof useSeeAllRestaurantsLazyQuery>;
+export type SeeAllRestaurantsQueryResult = Apollo.QueryResult<SeeAllRestaurantsQuery, SeeAllRestaurantsQueryVariables>;
+export const SeeCategoryDocument = gql`
+    query SeeCategory($input: SeeCategoryInput!) {
+  seeCategory(input: $input) {
+    ok
+    message
+    totalPages
+    totalRestaurants
+    category {
+      ...CategoryFragment
+      restaurants {
+        ...RestaurantFragment
+      }
+    }
+  }
+}
+    ${CategoryFragmentFragmentDoc}
+${RestaurantFragmentFragmentDoc}`;
+
+/**
+ * __useSeeCategoryQuery__
+ *
+ * To run a query within a React component, call `useSeeCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeeCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeeCategoryQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSeeCategoryQuery(baseOptions: Apollo.QueryHookOptions<SeeCategoryQuery, SeeCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeeCategoryQuery, SeeCategoryQueryVariables>(SeeCategoryDocument, options);
+      }
+export function useSeeCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeCategoryQuery, SeeCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeeCategoryQuery, SeeCategoryQueryVariables>(SeeCategoryDocument, options);
+        }
+export type SeeCategoryQueryHookResult = ReturnType<typeof useSeeCategoryQuery>;
+export type SeeCategoryLazyQueryHookResult = ReturnType<typeof useSeeCategoryLazyQuery>;
+export type SeeCategoryQueryResult = Apollo.QueryResult<SeeCategoryQuery, SeeCategoryQueryVariables>;
 export const SeeMeDocument = gql`
     query SeeMe {
   seeMe {
@@ -807,3 +1032,42 @@ export function useSeeMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeM
 export type SeeMeQueryHookResult = ReturnType<typeof useSeeMeQuery>;
 export type SeeMeLazyQueryHookResult = ReturnType<typeof useSeeMeLazyQuery>;
 export type SeeMeQueryResult = Apollo.QueryResult<SeeMeQuery, SeeMeQueryVariables>;
+export const SeeRestaurantDocument = gql`
+    query SeeRestaurant($input: SeeRestaurantInput!) {
+  seeRestaurant(input: $input) {
+    ok
+    message
+    restaurant {
+      ...RestaurantFragment
+    }
+  }
+}
+    ${RestaurantFragmentFragmentDoc}`;
+
+/**
+ * __useSeeRestaurantQuery__
+ *
+ * To run a query within a React component, call `useSeeRestaurantQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSeeRestaurantQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSeeRestaurantQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSeeRestaurantQuery(baseOptions: Apollo.QueryHookOptions<SeeRestaurantQuery, SeeRestaurantQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SeeRestaurantQuery, SeeRestaurantQueryVariables>(SeeRestaurantDocument, options);
+      }
+export function useSeeRestaurantLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SeeRestaurantQuery, SeeRestaurantQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SeeRestaurantQuery, SeeRestaurantQueryVariables>(SeeRestaurantDocument, options);
+        }
+export type SeeRestaurantQueryHookResult = ReturnType<typeof useSeeRestaurantQuery>;
+export type SeeRestaurantLazyQueryHookResult = ReturnType<typeof useSeeRestaurantLazyQuery>;
+export type SeeRestaurantQueryResult = Apollo.QueryResult<SeeRestaurantQuery, SeeRestaurantQueryVariables>;

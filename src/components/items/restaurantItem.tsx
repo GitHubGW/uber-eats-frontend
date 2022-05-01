@@ -16,7 +16,7 @@ const RestaurantItem = ({ id, name, address, imageUrl, isPromoted, promotedUntil
       <Link to={`/restaurants/${name}`}>
         <div className="h-64 overflow-hidden relative">
           <img src={imageUrl} alt="" className="w-full" />
-          {isPromoted === true ? <img src="images/icon_promo.png" alt="" className="w-8 h-8 z-50 absolute top-2 right-2" /> : null}
+          {isPromoted === true ? <img src="/images/icon_promo.png" alt="" className="w-8 h-8 z-50 absolute top-2 right-2" /> : null}
         </div>
         <div>
           <h2 className="font-medium mt-2">{name}</h2>

@@ -13,9 +13,9 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ id, name, address, imageUrl, isPromoted, promotedUntilDate, categoryName }: RestaurantItemProps) => {
   return (
     <div className="cursor-pointer">
-      <Link to={`/restaurants/${name}`}>
+      <Link to={`/restaurants/${id}`}>
         <div className="h-64 overflow-hidden relative">
-          <img src={imageUrl} alt="" className="w-full" />
+          <img src={imageUrl} alt="" className="w-full h-[250px] max-h[250px]" />
           {isPromoted === true ? <img src="/images/icon_promo.png" alt="" className="w-8 h-8 z-50 absolute top-2 right-2" /> : null}
         </div>
         <div>

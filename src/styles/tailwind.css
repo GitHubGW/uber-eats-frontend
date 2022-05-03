@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+.border-red{
+  @apply border-4 border-red-500
+}
+
+.border-blue{
+  @apply border-4 border-blue-500
+}
+
+.border-green{
+  @apply border-4 border-green-500
+}
+
+.wrapper{
+  @apply w-full h-[calc(100vh_-_112px)] flex justify-center items-center 
+}
+.content{
+  @apply w-[1280px] max-w-7xl
+}
+
+.input{
+  @apply pl-3 py-3 border border-gray-200 focus:border-green-500 outline-none shadow-sm transition-colors
+}
+
+.button{
+  @apply px-4 py-3 text-center text-white mt-1 box-border flex justify-center items-center
+}
+
+*::selection {
+  background-color: rgb(134, 239, 172);
 }

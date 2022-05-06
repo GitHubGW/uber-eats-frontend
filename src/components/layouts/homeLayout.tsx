@@ -7,7 +7,7 @@ interface HomeLayoutProps {
 
 const HomeLayout = ({ pageTitle, children }: HomeLayoutProps) => {
   return (
-    <div className="">
+    <div>
       <PageTitle title={pageTitle} />
       {children}
     </div>

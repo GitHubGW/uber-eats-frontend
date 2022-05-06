@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-gql`
+export const SEE_ME_QUERY = gql`
   query SeeMe {
     seeMe {
       id

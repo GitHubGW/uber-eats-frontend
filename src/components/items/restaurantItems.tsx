@@ -1,9 +1,28 @@
 import Loading from "../loading";
 import RestaurantItem from "./restaurantItem";
 
+interface Category {
+  __typename?: "Category" | undefined;
+  id: number;
+  name: string;
+  imageUrl: string;
+  totalRestaurants: number;
+}
+
+interface RestaurantWithCategory {
+  __typename?: "Restaurant" | undefined;
+  id: number;
+  name: string;
+  address: string;
+  imageUrl: string;
+  isPromoted: boolean;
+  promotedUntilDate?: any;
+  category?: Category | null | undefined;
+}
+
 interface RestaurantItemsProps {
   loading: boolean;
-  restaurants: any;
+  restaurants: RestaurantWithCategory[] | null | undefined;
 }
 
 const RestaurantItems = ({ loading, restaurants }: RestaurantItemsProps) => {
@@ -14,7 +33,7 @@ const RestaurantItems = ({ loading, restaurants }: RestaurantItemsProps) => {
           <Loading size="w-6" />
         ) : (
           <>
-            {restaurants?.map((restaurant: any) => (
+            {restaurants?.map((restaurant) => (
               <RestaurantItem
                 key={restaurant.id}
                 id={restaurant.id}
@@ -23,7 +42,7 @@ const RestaurantItems = ({ loading, restaurants }: RestaurantItemsProps) => {
                 imageUrl={restaurant.imageUrl}
                 isPromoted={restaurant.isPromoted}
                 promotedUntilDate={restaurant.promotedUntilDate}
-                categoryName={restaurant.category?.name || ""}
+                categoryName={restaurant.category?.name}
               />
             ))}
           </>

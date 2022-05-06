@@ -1,9 +1,17 @@
 import Loading from "../loading";
 import CategoryItem from "./categoryItem";
 
+interface Category {
+  __typename?: "Category" | undefined;
+  id: number;
+  name: string;
+  imageUrl: string;
+  totalRestaurants: number;
+}
+
 interface CategoryItemsProps {
   loading: boolean;
-  category: any;
+  category: Category[] | null | undefined;
 }
 
 const CategoryItems = ({ loading, category }: CategoryItemsProps) => {
@@ -14,7 +22,7 @@ const CategoryItems = ({ loading, category }: CategoryItemsProps) => {
           <Loading size="w-6" />
         ) : (
           <>
-            {category?.map((category: any) => (
+            {category?.map((category) => (
               <CategoryItem key={category.id} name={category.name} imageUrl={category.imageUrl} />
             ))}
           </>

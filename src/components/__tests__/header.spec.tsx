@@ -5,7 +5,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { BrowserRouter } from "react-router-dom";
 import { SEE_ME_QUERY } from "../../documents/queries/seeMe.query";
 
-const seeMeQueryMockFirst = [
+const emailVerifiedFalseMock = [
   {
     request: {
       query: SEE_ME_QUERY,
@@ -26,7 +26,7 @@ const seeMeQueryMockFirst = [
   },
 ];
 
-const seeMeQueryMockSecond = [
+const emailVerifiedTrueMock = [
   {
     request: {
       query: SEE_ME_QUERY,
@@ -50,7 +50,7 @@ const seeMeQueryMockSecond = [
 describe("<Header /> (header.tsx)", () => {
   it("should render Header with verify warning (emailVerified: false)", async () => {
     render(
-      <MockedProvider mocks={seeMeQueryMockFirst}>
+      <MockedProvider mocks={emailVerifiedFalseMock}>
         <BrowserRouter>
           <Header />
         </BrowserRouter>
@@ -66,7 +66,7 @@ describe("<Header /> (header.tsx)", () => {
 
   it("should render Header without verify warning (emailVerified: true)", async () => {
     render(
-      <MockedProvider mocks={seeMeQueryMockSecond}>
+      <MockedProvider mocks={emailVerifiedTrueMock}>
         <BrowserRouter>
           <Header />
         </BrowserRouter>

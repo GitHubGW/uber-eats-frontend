@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-gql`
+export const LOGIN_MUTATION = gql`
   mutation Login($input: LoginInput!) {
     login(input: $input) {
       ok
